@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Geolocation Test</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>GeoLocation Example</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="geoLocErrorMsg" tabindex="-1" role="dialog" aria-labelledby="geoLocErrorMsgLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="geoLocErrorMsgLabel">Geolocation is blocked</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Looks like your geolocation permissions are blocked. Please, provide geolocation access in your
+                    browser settings and get
+                    the nearest ads.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="allowPermission();" class="btn btn-primary">Allow Permission</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery JS CDN -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS CDN -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Script for Geo Location -->
+    <script src="js/geolocation.js"></script>
+    <script>
+        (function () {
+            navigator.geolocation.getAccurateCurrentPosition(
+                function (data) {
+                    console.log(data);
+                },
+                function (error) {
+                    if (error.code == 1) {
+                        $('#geoLocErrorMsg').modal('show');
+                    }
+                },
+                function (prog) {
+                    console.log(prog);
+                },
+                { desiredAccuracy: 20, maxWait: 15000 });
+        })();
+    </script>
+</body>
+
+</html>
